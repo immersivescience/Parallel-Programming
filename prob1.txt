@@ -1,0 +1,47 @@
+Sieve of Eratosthenes algorithm
+
+This algorithm is used to identify all prime numbers in a given range of natural numbers. To create a program in C++, let us understand how we can use it.
+
+1. lets say we have have an array of natural numbers from 2 to n(assume n=10).
+
+[2,3,4,5,6,7,8,9,10]
+
+2. Starting from 2, we will identify all the multiples of it in the array and mark it(make it 0/delete it) except the number itself(2 here). I am making it 0 if it is a multiple.
+
+[2,3,0,5,0,7,0,9,0]
+
+3. Now, we have to repeat the step 2 but with next unmarked number(3 in our case).
+
+So, our array will look like [2,3,0,5,0,7,0,0,0]
+
+4. Repeat the same for next unmarked number until the multiplication of the unmarked number with itself becomes greater than the size of array(n).
+
+For our case, size of array was 10, so using this algorithm, we will get the prime numbers upto 10 with iterations upto 3.(3*3 = 9 is less than 10 and 4*4=16 which is greater than 10).
+
+Lets do the same in our program.
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+   int n=0;
+   cout<<"Please Enter the number upto to which you want to find the prime number:";
+   cin>>n;
+int arr[n];
+for(int i=0;i<n;i++){
+   arr[i]=0; //intializing all the array elements to 0
+   }
+   for (int i=2;i<n;i++)
+{
+for (int j=i*i;j<n;j=i+j)   
+{
+arr[j-1] = 1; //setting non prime numbers to 1
+}
+}
+for (int i=1;i<n;i++)
+{
+if (arr[i-1]==0) //the array elements whose value is 0 are prime numbers
+cout<<i<<" "; //printing out the array index which are the prime numbers indeed.
+}
+}
